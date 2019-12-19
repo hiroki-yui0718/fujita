@@ -56,14 +56,14 @@ public class Anim : MonoBehaviour
 
         transform.position += new Vector3(x, 0, z);
 
-        //T:相手
+        //相手に一台も攻撃していないとき
         if (T != null)
         {
              Target = T.transform.position - this.transform.position;
              if (!Physics.Raycast(this.transform.position, Target, 10f, Layer))
              {
                  Debug.Log("LookOn");
-                //近接判定
+                //攻撃判定
                 Look = true;
              }
              else
@@ -94,14 +94,15 @@ public class Anim : MonoBehaviour
         //敵だったら
         if ((gameObject.tag == "red" && other.tag == "blue") || (gameObject.tag == "blue" && other.tag == "red"))
         {
-            //
+            //近接したとき
             if (T == null)
             {
                 T = other.gameObject;
+                //ここでTに代入
                 anim.SetBool("Attack", true);
 
             }
-            //離れる判定
+            //攻撃から離れる判定
             if ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) || (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
                 || (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)) || (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S)) && Look == true)
             {
@@ -124,6 +125,7 @@ public class Anim : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        //物理的に離れる
         Debug.Log("LookOut");
         anim.SetBool("Attack", false);
         Look = false;

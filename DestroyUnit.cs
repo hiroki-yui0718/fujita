@@ -17,6 +17,7 @@ public class DestroyUnit : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
+        //値の取得
         photonView = GetComponent<PhotonView>();
 
         if (photonView.name.Equals("PS-P01(Clone)")) //中量型
@@ -47,7 +48,8 @@ public class DestroyUnit : MonoBehaviourPunCallbacks
         if (other.CompareTag("Bullet"))
         {
             //HP =  HP - HitBullet.bullet_PP;
-            //0Debug.Log(Name +":"+ HP);
+            //0Debug.Log(Name +":"+ HP)
+            Debug.Log("球物理判定");
             if(photonView.IsMine == false) { return; }
             photonView.RPC("HPdamage", RpcTarget.All, HitBullet.bullet_PP);
 

@@ -21,6 +21,7 @@ public class HitBullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider c)
     {
+        //敵 or 障害
         if (c.CompareTag("Enemy") || c.CompareTag("Obstacle"))
         {
             Destroy(this.gameObject);
